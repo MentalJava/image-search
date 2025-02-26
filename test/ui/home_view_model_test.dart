@@ -8,7 +8,7 @@ void main() {
     final viewModel = HomeViewModel(FakePhotoApiRepository());
 
     await viewModel.fetch('apple');
-    await viewModel.fetch('apple');
+    await viewModel.fetch('iphone');
 
     final result = fakeJson
         .map(
@@ -95,35 +95,5 @@ List<Map<String, dynamic>> fakeJson = [
     "user": "Nennieinszweidrei",
     "userImageURL":
         "https://cdn.pixabay.com/user/2022/12/04/11-13-16-116_250x250.png"
-  },
-  {
-    "id": 6162613,
-    "pageURL":
-        "https://pixabay.com/photos/yellow-rose-rose-flower-cereal-6162613/",
-    "type": "photo",
-    "tags":
-        "yellow rose, rose, rose flower, flower wallpaper, flower, cereal, yellow flower, garden, nature, closeup, plants, flora, fragrant, plant, floral, blossomed, light yellow, beautiful, flowers, roses, flower background, soft, yellow rose, yellow rose, yellow rose, yellow rose, yellow rose, rose, yellow flower, beautiful flowers, flowers, roses",
-    "previewURL":
-        "https://cdn.pixabay.com/photo/2021/04/08/18/59/yellow-rose-6162613_150.jpg",
-    "previewWidth": 150,
-    "previewHeight": 100,
-    "webformatURL":
-        "https://pixabay.com/get/g74fd62fb8da222b2b59c794ced897a361c022ed6005909ffe5178034a9d5c076817367344e7e9e87b7c95bf3ef550ea6a4db5ceb156f0b8dc65360c1cca046cc_640.jpg",
-    "webformatWidth": 640,
-    "webformatHeight": 427,
-    "largeImageURL":
-        "https://pixabay.com/get/gc97f3f07bb7d26e283699ff005f99141edfb9ca24f82970703c8aade8818f7f92c4eafcab9f5549296d93308172f5b97a0b1c3bf19832cd4119c2c89d6095a9c_1280.jpg",
-    "imageWidth": 4240,
-    "imageHeight": 2832,
-    "imageSize": 2389361,
-    "views": 57831,
-    "downloads": 43143,
-    "collections": 130,
-    "likes": 290,
-    "comments": 199,
-    "user_id": 9363663,
-    "user": "Nowaja",
-    "userImageURL":
-        "https://cdn.pixabay.com/user/2020/09/15/15-16-12-52_250x250.jpg"
   },
 ];

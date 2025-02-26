@@ -19,7 +19,7 @@ class PhotoWidget extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(
-            photoModel.previewURL,
+            photoModel.previewUrl,
           ),
         ),
       ),
