@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/api/data/photo_provider.dart';
-import 'package:image_search/model/photo_model.dart';
+import 'package:image_search/data/photo_provider.dart';
+import 'package:image_search/model/photo.dart';
 import 'package:image_search/ui/widget/photo_widget.dart';
 
 class HomeView extends StatefulWidget {
@@ -13,8 +13,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final _controller = TextEditingController();
 
-  List<PhotoModel> _photos = [];
-
   @override
   void dispose() {
     _controller.dispose();
@@ -23,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final photoProvider = PhotoProvider.of(context);
+    final viewmodel = PhotoProvider.of(context).viewModel;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,34 +47,41 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 suffixIcon: IconButton(
                   onPressed: () async {
-                    final photos =
-                        await photoProvider.api.fetch(_controller.text);
-                    setState(() {
-                      _photos = photos;
-                    });
+                    viewmodel.fetch(_controller.text);
                   },
                   icon: const Icon(Icons.search),
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _photos.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) {
-                final photo = _photos[index];
-                return PhotoWidget(
-                  photoModel: photo,
+          StreamBuilder<List<Photo>>(
+              stream: viewmodel.photoStream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
+
+                final photos = snapshot.data!;
+
+                return Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: photos.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                    ),
+                    itemBuilder: (context, index) {
+                      final photo = photos[index];
+                      return PhotoWidget(
+                        photoModel: photo,
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
-          )
+              })
         ],
       ),
     );

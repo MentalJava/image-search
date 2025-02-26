@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/model/photo_model.dart';
+import 'package:image_search/model/photo.dart';
 
 class PhotoWidget extends StatelessWidget {
   const PhotoWidget({
@@ -7,7 +7,7 @@ class PhotoWidget extends StatelessWidget {
     required this.photoModel,
   });
 
-  final PhotoModel photoModel;
+  final Photo photoModel;
 
   @override
   Widget build(BuildContext context) {
